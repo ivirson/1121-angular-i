@@ -62,7 +62,7 @@ A CLI Angular é uma ferramenta de interface de linha de comando que você usa p
 
 Para poder utilizar os estilos do Bootstrap em sua aplicação Angular, são necessários os seguintes passos:
 
-1. Instalar o Bootstrap e Bootstrap Icons:
+1. Instalar o Bootstrap:
 
 `npm install bootstrap`
 
