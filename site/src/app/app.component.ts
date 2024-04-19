@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pages } from './constants/pages.enum';
-import { AppData } from './models/section-features.model';
+import { AppData, SectionContact } from './models/section-features.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  currentPage!: Pages;
+export class AppComponent implements OnInit {
+  currentPage: Pages = Pages.CONTACT;
 
   pages = Pages;
 
@@ -83,8 +83,17 @@ export class AppComponent {
     },
   };
 
+  ngOnInit(): void {
+    console.log(this.appData.sectionContact);
+  }
+
   goToPage(page: Pages): void {
     this.currentPage = page;
+  }
+
+  handleSaveContactData(event: SectionContact): void {
+    console.log(event);
+    this.appData.sectionContact = event;
   }
 
   /*
