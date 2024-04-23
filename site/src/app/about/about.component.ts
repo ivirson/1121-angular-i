@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SectionData } from '../models/section-features.model';
 
 @Component({
@@ -6,6 +6,18 @@ import { SectionData } from '../models/section-features.model';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css'],
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
   @Input() aboutData?: SectionData;
+
+  timer = 5
+
+  ngOnInit(): void {
+    const interval = setInterval(() => {
+      if (this.timer === 0) {
+        clearInterval(interval)
+      } else {
+        this.timer--
+      }
+    }, 1000)
+  }
 }

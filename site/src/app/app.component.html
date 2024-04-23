@@ -1,5 +1,9 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- <nav
+  class="navbar navbar-expand-lg"
+  [ngStyle]="{ 'background-color': isAuthenticated ? '#cecece' : '#000000' }"
+> -->
   <div class="container-fluid">
     <a class="navbar-brand" (click)="goToPage(pages.HOME)">
       <img src="./../assets/images/logo_wt.png" alt="" />
@@ -35,14 +39,27 @@
           <a class="nav-link" (click)="goToPage(pages.CONTACT)">Contato</a>
         </li>
       </ul>
+      <div [ngSwitch]="today" [ngStyle]="{ color: '#fff' }">
+        <span *ngSwitchCase="0">Domingo</span>
+        <span *ngSwitchCase="1">Segunda-feira</span>
+        <span *ngSwitchCase="2">Terça-feira</span>
+        <span *ngSwitchCase="3">Quarta-feira</span>
+        <span *ngSwitchCase="4">Quinta-feira</span>
+        <span *ngSwitchCase="5">Sexta-feira</span>
+        <span *ngSwitchCase="6">Sábado</span>
+        <span *ngSwitchDefault>Deu ruim</span>
+      </div>
       <form class="d-flex">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <a class="btn btn-outline-light" href="#">Search</a>
+        <!-- <button
+          id="btnLogin"
+          class="btn btn-outline-light"
+          (click)="toggleLogin()"
+        >
+          Login
+        </button> -->
+        <button class="btn btn-outline-light" (click)="toggleLogin()">
+          {{ isAuthenticated ? "Sair" : "Login" }}
+        </button>
       </form>
     </div>
   </div>

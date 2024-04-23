@@ -7,16 +7,14 @@ export interface AppData {
 
 export interface SectionFeatures {
   title: string;
-  feature1: Feature;
-  feature2: Feature;
-  feature3: Feature;
-  feature4: Feature;
+  features: Feature[];
 }
 
 export interface Feature {
   title: string;
   image: string;
   text: string;
+  active: boolean;
 }
 
 export interface SectionData {

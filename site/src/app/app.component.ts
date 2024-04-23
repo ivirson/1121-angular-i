@@ -8,33 +8,43 @@ import { AppData, SectionContact } from './models/section-features.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  currentPage: Pages = Pages.CONTACT;
+  currentPage: Pages = Pages.HOME;
 
   pages = Pages;
+
+  isAuthenticated = false;
+
+  today?: number;
 
   appData: AppData = {
     sectionFeatures: {
       title: 'Destaques dinâmico',
-      feature1: {
-        title: 'Destaque 1',
-        image: 'feature1.png',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dolor arcu, malesuada eget posuere et.',
-      },
-      feature2: {
-        title: 'Destaque 2',
-        image: 'feature2.png',
-        text: 'Aenean laoreet, felis id sollicitudin fringilla, leo orci iaculis eros, et volutpat nunc lacus ut sapien.',
-      },
-      feature3: {
-        title: 'Destaque 3',
-        image: 'feature3.png',
-        text: 'Aenean non eros congue leo consectetur fermentum. Quisque ut dignissim tortor, eget porttitor magna.',
-      },
-      feature4: {
-        title: 'Destaque 4',
-        image: 'feature4.png',
-        text: 'Duis id odio dapibus, finibus tortor eget, cursus nunc. Morbi egestas nisl orci, in cursus ipsum cursus et.',
-      },
+      features: [
+        {
+          title: 'Destaque 1',
+          image: 'feature1.png',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dolor arcu, malesuada eget posuere et.',
+          active: true,
+        },
+        {
+          title: 'Destaque 2',
+          image: 'feature2.png',
+          text: 'Aenean laoreet, felis id sollicitudin fringilla, leo orci iaculis eros, et volutpat nunc lacus ut sapien.',
+          active: false,
+        },
+        {
+          title: 'Destaque 3',
+          image: 'feature3.png',
+          text: 'Aenean non eros congue leo consectetur fermentum. Quisque ut dignissim tortor, eget porttitor magna.',
+          active: true,
+        },
+        {
+          title: 'Destaque 4',
+          image: 'feature4.png',
+          text: 'Duis id odio dapibus, finibus tortor eget, cursus nunc. Morbi egestas nisl orci, in cursus ipsum cursus et.',
+          active: true,
+        },
+      ],
     },
     sectionAbout: {
       title: 'Sobre nós',
@@ -85,6 +95,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.appData.sectionContact);
+    const date = new Date();
+    this.today = date.getDay();
   }
 
   goToPage(page: Pages): void {
@@ -94,6 +106,13 @@ export class AppComponent implements OnInit {
   handleSaveContactData(event: SectionContact): void {
     console.log(event);
     this.appData.sectionContact = event;
+  }
+
+  toggleLogin(): void {
+    this.isAuthenticated = !this.isAuthenticated;
+    // document.getElementById('btnLogin')!.innerText = this.isAuthenticated
+    //   ? 'Sair'
+    //   : 'Login';
   }
 
   /*
