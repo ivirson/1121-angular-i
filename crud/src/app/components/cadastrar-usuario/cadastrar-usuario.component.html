@@ -1,0 +1,176 @@
+<div class="container">
+  <h1 class="mt-4">Cadastro de usuários</h1>
+  <form [formGroup]="userForm" (ngSubmit)="onSave()">
+    <fieldset class="border p-4 mb-4">
+      <legend>Dados pessoais</legend>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="name" class="form-label">Nome</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+          />
+        </div>
+        <div class="col-6">
+          <label for="email" class="form-label">E-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="profession" class="form-label">Profissão</label>
+          <input
+            type="text"
+            class="form-control"
+            id="profession"
+            formControlName="profession"
+          />
+        </div>
+        <div class="col-6">
+          <label for="documentNumber" class="form-label">CPF</label>
+          <input
+            type="text"
+            class="form-control"
+            id="documentNumber"
+            formControlName="documentNumber"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="birthDate" class="form-label">Data de nascimento</label>
+          <input
+            type="date"
+            class="form-control"
+            id="birthDate"
+            formControlName="birthDate"
+          />
+        </div>
+        <div class="col-6">
+          <label for="monthlyIncome" class="form-label">Renda mensal</label>
+          <input
+            type="text"
+            class="form-control"
+            id="monthlyIncome"
+            formControlName="monthlyIncome"
+          />
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset formGroupName="address" class="border p-4 mb-4">
+      <legend>Endereço</legend>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="zipCode" class="form-label">CEP</label>
+          <input
+            type="text"
+            class="form-control"
+            id="zipCode"
+            formControlName="zipCode"
+          />
+        </div>
+        <div class="col-6">
+          <label for="street" class="form-label">Rua</label>
+          <input
+            type="text"
+            class="form-control"
+            id="street"
+            formControlName="street"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="number" class="form-label">Número</label>
+          <input
+            type="number"
+            class="form-control"
+            id="number"
+            formControlName="number"
+          />
+        </div>
+        <div class="col-6">
+          <label for="complement" class="form-label">Complemento</label>
+          <input
+            type="text"
+            class="form-control"
+            id="complement"
+            formControlName="complement"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="district" class="form-label">Bairro</label>
+          <input
+            type="text"
+            class="form-control"
+            id="district"
+            formControlName="district"
+          />
+        </div>
+        <div class="col-6">
+          <label for="city" class="form-label">Cidade</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            formControlName="city"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="state" class="form-label">Estado</label>
+          <input
+            type="text"
+            class="form-control"
+            id="state"
+            formControlName="state"
+          />
+        </div>
+        <div class="col-6">
+          <label for="country" class="form-label">País</label>
+          <input
+            type="text"
+            class="form-control"
+            id="country"
+            formControlName="country"
+          />
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-outline-primary me-3"
+        (click)="userForm.reset()"
+      >
+        Limpar
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="userForm.invalid"
+      >
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>
