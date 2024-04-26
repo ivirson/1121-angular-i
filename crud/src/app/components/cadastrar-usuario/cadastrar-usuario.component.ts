@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/models/user.model';
+import { filter, first } from 'rxjs';
+import { AddressDto } from 'src/app/models/address.dto';
+import { Address, User } from './../../models/user.model';
 
 @Component({
   selector: 'app-cadastrar-usuario',
@@ -9,60 +12,86 @@ import { User } from 'src/app/models/user.model';
 })
 export class CadastrarUsuarioComponent implements OnInit {
   userForm = new FormGroup({
-    id: new FormControl(),
-    name: new FormControl(null, [
+    name: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
       Validators.pattern(/^[a-zA-Z_]+$/),
     ]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    profession: new FormControl(null, [Validators.required]),
-    documentNumber: new FormControl(null, [
+    email: new FormControl('', [Validators.required, Validators.email]),
+    profession: new FormControl('', [Validators.required]),
+    documentNumber: new FormControl('', [
       Validators.required,
       Validators.minLength(11),
       Validators.maxLength(11),
     ]),
-    birthDate: new FormControl(null, [Validators.required]),
-    monthlyIncome: new FormControl(null, [Validators.required]),
+    birthDate: new FormControl('', [Validators.required]),
+    monthlyIncome: new FormControl('', [Validators.required]),
     address: new FormGroup({
-      zipCode: new FormControl(null, [Validators.required]),
-      street: new FormControl(null, [Validators.required]),
-      number: new FormControl(null, [Validators.required]),
+      zipCode: new FormControl('', [Validators.required]),
+      street: new FormControl('', [Validators.required]),
+      number: new FormControl('', [Validators.required]),
       complement: new FormControl(),
-      district: new FormControl(null, [Validators.required]),
-      city: new FormControl(null, [Validators.required]),
-      state: new FormControl(null, [Validators.required]),
-      country: new FormControl(null, [Validators.required]),
+      district: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
+      state: new FormControl('', [Validators.required]),
+      country: new FormControl('', [Validators.required]),
     }),
   });
 
-  user: User = {
-    name: 'Ivirson',
-    email: 'ivi.daltro@email.com',
-    profession: 'Dev',
-    documentNumber: '01234567890',
-    birthDate: '2000-01-01',
-    monthlyIncome: 1000,
-    address: {
-      complement: 'Casa do fundo',
-      country: 'Brasil',
-      district: 'Bairro B',
-      number: 5,
-      state: 'BA',
-      street: 'Rua A',
-      zipCode: '42800049',
-      city: 'Camaçari',
-    },
-  };
+  apiUrl = `https://crudcrud.com/api/0c3f823a450b457db58fe8b8c5a9ad15/users`;
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     // this.userForm.patchValue(this.user);
+    this.setZipCodeSubscription();
+  }
+
+  private setZipCodeSubscription(): void {
+    this.userForm.controls.address.controls.zipCode.valueChanges
+      .pipe(filter((value) => value?.length === 8))
+      .subscribe((value) => {
+        this.getAddressByZipCode(value as string);
+      });
+  }
+
+  private getAddressByZipCode(zipCode: string): void {
+    this.http
+      .get<AddressDto>(`https://viacep.com.br/ws/${zipCode}/json/`)
+      .pipe(first())
+      .subscribe({
+        next: (response: AddressDto) => {
+          const address: Partial<Address> = {
+            // zipCode: response.cep,
+            street: response.logradouro,
+            complement: response.complemento,
+            district: response.bairro,
+            city: response.localidade,
+            state: response.uf,
+          };
+
+          this.userForm.controls.address.patchValue(address);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 
   onSave(): void {
     const user = this.userForm.getRawValue();
     // TO DO Ivirson - Verificar erro no User
     // const user: User = this.userForm.getRawValue();
-    console.log(user);
+    this.http
+      .post<User>(this.apiUrl, user)
+      .pipe(first())
+      .subscribe({
+        next: (response: User) => {
+          console.log(response);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 }

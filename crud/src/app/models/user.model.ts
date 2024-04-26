@@ -1,5 +1,5 @@
 export interface User {
-  id?: string;
+  _id?: string;
   name: string;
   email: string;
   profession: string;
@@ -12,10 +12,10 @@ export interface User {
 export interface Address {
   zipCode: string;
   street: string;
-  number: number;
+  number: string;
   complement?: string;
   district: string;
   city: string;
   state: string;
-  country: string;
+  country?: string;
 }
