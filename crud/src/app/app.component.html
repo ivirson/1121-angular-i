@@ -15,7 +15,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            (click)="goToPage(pages.CREATE)"
+            >Cadastrar</a
+          >
         </li>
       </ul>
       <button class="btn btn-outline-light" type="submit">Login</button>
@@ -24,5 +29,9 @@
 </nav>
 
 <main>
-  <app-cadastrar-usuario></app-cadastrar-usuario>
+  <app-cadastrar-usuario
+    *ngIf="currentPage === pages.CREATE"
+    (redirectEmitter)="goToPage($event)"
+  ></app-cadastrar-usuario>
+  <app-listar-usuarios *ngIf="currentPage === pages.LIST"></app-listar-usuarios>
 </main>

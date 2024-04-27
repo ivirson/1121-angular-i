@@ -1,0 +1,72 @@
+<div class="container">
+  <h1 class="text-center mt-4">Usuários</h1>
+
+  <div class="row">
+    <div class="col-3" *ngFor="let user of users">
+      <div class="card">
+        <div class="card-header">
+          <h3>{{ user.name }}</h3>
+          <small>{{ user.profession }}</small>
+        </div>
+
+        <div class="card-body">
+          <p><strong>E-mail: </strong>{{ user.email }}</p>
+          <p><strong>CPF: </strong>{{ user.documentNumber }}</p>
+          <p><strong>Data Nasc.: </strong>{{ user.birthDate }}</p>
+          <p><strong>Renda mensal: </strong>{{ user.monthlyIncome }}</p>
+          <p><strong>Endereco: </strong>{{ addressMapper(user.address) }}</p>
+        </div>
+
+        <div class="card-footer d-flex justify-content-end">
+          <button
+            type="button"
+            class="btn btn-primary me-2"
+            data-bs-toggle="modal"
+            data-bs-target="#editModal"
+            (click)="setUserId(user._id!)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteUser(user._id!)"
+          >
+            Excluir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal modal-xl fade"
+    id="editModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <app-cadastrar-usuario
+            [userId]="userId"
+            *ngIf="userId"
+          ></app-cadastrar-usuario>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

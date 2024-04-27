@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Pages } from './constants/pages.enum';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  currentPage: Pages = Pages.LIST;
+
+  pages = Pages;
+
+  goToPage(page: Pages): void {
+    this.currentPage = page;
+  }
   // obs = new Observable((observer) => {
   //   console.log('Início');
 

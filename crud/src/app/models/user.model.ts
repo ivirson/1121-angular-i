@@ -5,7 +5,7 @@ export interface User {
   profession: string;
   documentNumber: string;
   birthDate: string; // 2024-04-24T19:25:45.000
-  monthlyIncome: number;
+  monthlyIncome: string;
   address: Address;
 }
 
