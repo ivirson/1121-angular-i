@@ -8,8 +8,8 @@ describe('ListarUsuariosComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ListarUsuariosComponent]
-    });
+    imports: [ListarUsuariosComponent]
+});
     fixture = TestBed.createComponent(ListarUsuariosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

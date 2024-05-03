@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Pages } from './constants/pages.enum';
+import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
+import { CadastrarUsuarioComponent } from './components/cadastrar-usuario/cadastrar-usuario.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: true,
+    imports: [
+        NgIf,
+        CadastrarUsuarioComponent,
+        ListarUsuariosComponent,
+    ],
 })
 export class AppComponent implements OnInit {
   currentPage: Pages = Pages.LIST;

@@ -8,8 +8,8 @@ describe('CadastrarUsuarioComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CadastrarUsuarioComponent]
-    });
+    imports: [CadastrarUsuarioComponent]
+});
     fixture = TestBed.createComponent(CadastrarUsuarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

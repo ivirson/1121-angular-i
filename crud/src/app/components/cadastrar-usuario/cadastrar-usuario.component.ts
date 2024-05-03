@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { filter, first } from 'rxjs';
 import { Pages } from 'src/app/constants/pages.enum';
 import { AddressDto } from 'src/app/models/address.dto';
 import { Address, User } from './../../models/user.model';
 
 @Component({
-  selector: 'app-cadastrar-usuario',
-  templateUrl: './cadastrar-usuario.component.html',
-  styleUrls: ['./cadastrar-usuario.component.css'],
+    selector: 'app-cadastrar-usuario',
+    templateUrl: './cadastrar-usuario.component.html',
+    styleUrls: ['./cadastrar-usuario.component.css'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule],
 })
 export class CadastrarUsuarioComponent implements OnInit {
   @Input() userId?: string;
@@ -42,7 +44,7 @@ export class CadastrarUsuarioComponent implements OnInit {
     }),
   });
 
-  apiKey = 'f86b4e832a83424b9a38d5c76ec47612';
+  apiKey = 'b4c6a52f61a94677a9a5788dd6586614';
   apiUrl = `https://crudcrud.com/api/${this.apiKey}/users`;
 
   constructor(private http: HttpClient) {}
